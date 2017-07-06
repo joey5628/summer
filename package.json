@@ -1,0 +1,27 @@
+{
+    "name": "summer",
+    "version": "0.0.3",
+    "private": true,
+    "scripts": {
+        "start": "node node_modules/react-native/local-cli/cli.js start",
+        "test": "jest"
+    },
+    "dependencies": {
+        "react": "15.4.2",
+        "react-native": "0.39.0",
+        "react-native-code-push": "^1.16.1-beta"
+    },
+    "devDependencies": {
+        "babel": "^6.23.0",
+        "babel-core": "^6.25.0",
+        "babel-jest": "20.0.3",
+        "babel-plugin-transform-remove-console": "^6.8.4",
+        "babel-preset-react-native": "2.1.0",
+        "babel-preset-react-native-stage-0": "^1.0.1",
+        "jest": "20.0.4",
+        "react-test-renderer": "15.4.2"
+    },
+    "jest": {
+        "preset": "react-native"
+    }
+}
