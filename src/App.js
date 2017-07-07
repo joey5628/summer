@@ -84,10 +84,9 @@ export default class App extends Component {
                         code-push demo
                     </Text>
                     <Text style={styles.title}>
-                        staging我的版本是:{packages.version}
+                        android我的版本是:{packages.version}
                     </Text>
-                    <Image style={{width: 56, height: 56}} source={require('./imgs/stockout.png')}></Image>
-                    <Image style={{width: 56, height: 56}} source={require('./imgs/11stockout.png')}></Image>
+                    <Image style={{width: 56, height: 56}} source={require('./imgs/22stockout.png')}></Image>
                 </View>
                 <View style={{flex: 1, justifyContent: 'flex-start'}}>
                     <TouchableOpacity onPress={this.onButtonPress.bind(this)}>
