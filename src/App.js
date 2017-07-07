@@ -4,10 +4,12 @@ import {
   Text,
   View,
   Alert,
+  Image,
   TouchableOpacity
 } from 'react-native';
 import packages from '../package.json'
 import CodePush from "react-native-code-push";
+import { codePushKey } from 'config'
 
 @CodePush({ checkFrequency: CodePush.CheckFrequency.MANUAL })
 export default class App extends Component {
@@ -15,33 +17,37 @@ export default class App extends Component {
         super(props)
     }
 
-    codePushStatusDidChange (syncStatus) {
+    componentWillMount () {
+        this.onButtonPress()
+    }
+
+    codePushStatusDidChange(syncStatus) {
         console.log('syncStatus:', syncStatus)
         console.log('CodePush.SyncStatus:', CodePush.SyncStatus)
         switch (syncStatus) {
             case CodePush.SyncStatus.CHECKING_FOR_UPDATE:
-                console.log( "Checking for update." );
+                console.log("Checking for update.");
                 break;
-              case CodePush.SyncStatus.DOWNLOADING_PACKAGE:
-                console.log( "Downloading package." );
+            case CodePush.SyncStatus.DOWNLOADING_PACKAGE:
+                console.log("Downloading package.");
                 break;
-              case CodePush.SyncStatus.AWAITING_USER_ACTION:
-                console.log( "Awaiting user action." );
+            case CodePush.SyncStatus.AWAITING_USER_ACTION:
+                console.log("Awaiting user action.");
                 break;
-              case CodePush.SyncStatus.INSTALLING_UPDATE:
-                console.log( "Installing update." );
+            case CodePush.SyncStatus.INSTALLING_UPDATE:
+                console.log("Installing update.");
                 break;
-              case CodePush.SyncStatus.UP_TO_DATE:
-                console.log( "App up to date." );
+            case CodePush.SyncStatus.UP_TO_DATE:
+                console.log("App up to date.");
                 break;
-              case CodePush.SyncStatus.UPDATE_IGNORED:
-                console.log( "Update cancelled by user." );
+            case CodePush.SyncStatus.UPDATE_IGNORED:
+                console.log("Update cancelled by user.");
                 break;
-              case CodePush.SyncStatus.UPDATE_INSTALLED:
-                console.log( "Update installed and will be applied on restart." );
+            case CodePush.SyncStatus.UPDATE_INSTALLED:
+                console.log("Update installed and will be applied on restart.");
                 break;
-              case CodePush.SyncStatus.UNKNOWN_ERROR:
-                console.log( "An unknown error occurred." );
+            case CodePush.SyncStatus.UNKNOWN_ERROR:
+                console.log("An unknown error occurred.");
                 break;
         }
     }
@@ -51,9 +57,10 @@ export default class App extends Component {
     }
 
     onButtonPress() {
-        let that = this
         CodePush.sync(
             {
+                //根据不同的环境加载不同的key
+                deploymentKey: codePushKey,
                 updateDialog: {
                     appendReleaseDescription: true,
                     title: '热更新',
@@ -77,8 +84,10 @@ export default class App extends Component {
                         code-push demo
                     </Text>
                     <Text style={styles.title}>
-                        我的版本是:{packages.version}
+                        staging我的版本是:{packages.version}
                     </Text>
+                    <Image style={{width: 56, height: 56}} source={require('./imgs/stockout.png')}></Image>
+                    <Image style={{width: 56, height: 56}} source={require('./imgs/11stockout.png')}></Image>
                 </View>
                 <View style={{flex: 1, justifyContent: 'flex-start'}}>
                     <TouchableOpacity onPress={this.onButtonPress.bind(this)}>
